@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mt-4">Blog Posts</h1>
+
+    {% if not user.is_authenticated %}
+        <p>Welcome to the blog! Please register or log in to create posts.</p>
+        <a href="{% url 'register' %}" class="btn btn-primary">Register</a>
+        <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+    {% endif %}
+
+    <ul class="list-group mt-4">
+        {% for post in posts %}
+            <li class="list-group-item">
+                <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No posts available. Start by creating one!</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
