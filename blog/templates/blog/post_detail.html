@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.title }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #333;
+        }
+        .post-meta {
+            font-size: 14px;
+            color: #777;
+        }
+        .content {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>{{ post.title }}</h1>
+    <p class="post-meta">By <strong>{{ post.author.username }}</strong> | Published on {{ post.publication_date }}</p>
+    
+    <div class="content">
+        <p>{{ post.content }}</p>
+    </div>
+
+    {% if user == post.author %}
+    <a href="{% url 'update_post' post.id %}">Edit</a> |
+    <a href="{% url 'delete_post' post.id %}" style="color: red;">Delete</a>
+    {% endif %}
+
+
+    <br><br>
+    <a href="{% url 'home' %}">Back to Home</a>
+
+</body>
+</html>

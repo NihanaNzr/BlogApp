@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from .models import Post
-from .forms import RegisterForm
+from .forms import RegisterForm, PostForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 
@@ -53,8 +53,31 @@ def create_post(request):
     return render(request, 'blog/create_post.html')
 
 @login_required
+def update_post(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    
+    # Ensure only the author can edit
+    if post.author != request.user:
+        messages.error(request, "You do not have permission to edit this post.")
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Post updated successfully!")
+            return redirect('post_detail', post_id=post.id)
+    else:
+        form = PostForm(instance=post)
+    
+    return render(request, 'blog/update_post.html', {'form': form, 'post': post})
+
+@login_required
 def delete_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if post.author == request.user:
         post.delete()
+        messages.success(request, "Post deleted successfully!")
+    else:
+        messages.error(request, "You do not have permission to delete this post.")
     return redirect('home')
