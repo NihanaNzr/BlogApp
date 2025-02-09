@@ -4,11 +4,59 @@
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
+    <title>{% block title %}Blog{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #fff;
+            padding: 12px 0;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+    font-family: 'Playfair Display', serif; /* Stylish font */
+    font-size: 1.8rem; /* Slightly larger */
+    font-weight: 700; /* Bold */
+    color: #e33e10 !important; /* Orange for a modern look */
+    letter-spacing: 1px; /* Adds slight spacing */
+    text-transform: uppercase; /* Makes it capitalized */
+    transition: 0.3s ease-in-out;
+}
+.navbar-brand:hover {
+    color: #cc5500 !important; /* Darker orange on hover */
+}
+
+
+        .navbar-nav .btn {
+            font-size: 0.9rem;
+        }
+
+        /* Dynamic Content Styling */
+        .content-container {
+            margin-top: 20px;
+        }
+
+        /* Auth Pages (Login/Register) */
+        .auth-container {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
 </head>
 <body>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
@@ -22,19 +70,24 @@
                         <a href="{% url 'create_post' %}" class="btn btn-success me-2">Create Post</a>
                         <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
                     {% else %}
-                        <a href="{% url 'register' %}" class="btn btn-primary me-2">Register</a>
-                        <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+                        {% if request.path == '/login/' %}
+                            <a href="{% url 'register' %}" class="btn btn-primary me-2">Register</a>
+                        {% elif request.path == '/register/' %}
+                            <a href="{% url 'login' %}" class="btn btn-secondary me-2">Login</a>
+                        {% else %}
+                            <a href="{% url 'register' %}" class="btn btn-primary me-2">Register</a>
+                            <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
+                        {% endif %}
                     {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Content -->
-    <div class="container mt-4">
-        {% block content %}
-        {% endblock %}
-    </div>
+    <!-- Main Content -->
+    
+        {% block content %}{% endblock %}
+    
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -1,48 +1,46 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="text-center mt-4">
-        <h1 class="fw-bold"> Blog Posts</h1>
-        <p class="text-muted">Explore the latest posts from our community!</p>
+<div class="container mt-4">
+    <div class="text-center">
+        <h1 class="fw-bold">Blog Posts</h1>
+        <p class="text-muted">Discover the newest posts from your blog!</p>
     </div>
 
     {% if not user.is_authenticated %}
-        <div class="alert alert-info text-center mt-4">
+        <div class="alert alert-info text-center">
             Welcome to the blog! Please register or log in to create posts.
         </div>
-        <div class="text-center">
+        <div class="d-flex justify-content-center mb-4">
             <a href="{% url 'register' %}" class="btn btn-primary me-2">Register</a>
             <a href="{% url 'login' %}" class="btn btn-secondary">Login</a>
         </div>
     {% endif %}
 
-    <div class="mt-5">
-        {% if posts %}
-            <div class="row row-cols-1 row-cols-md-2 g-4">
-                {% for post in posts %}
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark fw-bold">
-                                        {{ post.title }}
-                                    </a>
-                                </h5>
-                                <p class="card-text text-muted">
-                                    by <strong>{{ post.author.username }}</strong> | {{ post.pub_date|date:"M d, Y" }}
-                                </p>
-                                <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary btn-sm">Read More</a>
-                            </div>
+    {% if posts %}
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            {% for post in posts %}
+                <div class="col">
+                    <div class="card shadow-sm h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{% url 'post_detail' post.id %}" class="text-decoration-none text-dark fw-bold">
+                                    {{ post.title }}
+                                </a>
+                            </h5>
+                            <p class="card-text text-muted">
+                                by <strong>{{ post.author.username }}</strong> | {{ post.pub_date|date:"M d, Y" }}
+                            </p>
+                            <a href="{% url 'post_detail' post.id %}" class="btn btn-outline-primary btn-sm">Read More</a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
-        {% else %}
-            <div class="alert alert-warning text-center mt-4">
-                No posts available. Start by creating one!
-            </div>
-        {% endif %}
-    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-warning text-center mt-4">
+            No posts available. Start by creating one!
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

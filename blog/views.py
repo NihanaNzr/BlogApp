@@ -30,6 +30,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
+    request.session.flush()
     return redirect('login')  # Redirect to login page after logout
 
 @login_required

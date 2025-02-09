@@ -1,20 +1,17 @@
 {% extends 'blog/base.html' %}
 {% load static %}
 
+{% block title %}Login - Blog{% endblock %}
+{% block container_class %}auth-container{% endblock %}
+
 {% block content %}
-<div class="d-flex justify-content-center align-items-center vh-100">
+<section class="d-flex justify-content-center align-items-start mt-4">
     <div class="card shadow p-4" style="width: 400px;">
         <h2 class="text-center mb-4">Login</h2>
 
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-success text-center">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-
+        
         <form method="post">
             {% csrf_token %}
-            
             <div class="mb-3">
                 <label for="id_username" class="form-label">Username</label>
                 <input type="text" class="form-control" name="username" id="id_username" required>
@@ -32,5 +29,5 @@
             Don't have an account? <a href="{% url 'register' %}" class="text-decoration-none">Register here</a>
         </p>
     </div>
-</div>
+</section>
 {% endblock %}
