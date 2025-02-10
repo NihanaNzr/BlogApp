@@ -48,7 +48,7 @@ Access the app at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 
 - Django - Backend Framework
 - Bootstrap 5 - Frontend Styling
-- SQLite/PostgreSQL - Database
+- SQLite - Database
 
 
 ## &nbsp;Contact
