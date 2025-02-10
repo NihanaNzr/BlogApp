@@ -4,12 +4,12 @@ A full-featured Django-based blogging application.
 BlogApp is a Django-based blog application where users can create, edit, and delete blog posts. It supports user authentication, rich text formatting, and an intuitive UI for seamless blogging.
 ## &nbsp;Features
 
--Create, Read, Update, and Delete (CRUD) operations for blog posts.
--User Authentication (Register, Login, Logout).
--Rich Text Editor for blog content.
--List &amp; Detail View of blog posts.
--Author-based post management (Only authors can edit/delete their own posts).
--Mobile-Responsive UI with Bootstrap 5.
+- Create, Read, Update, and Delete (CRUD) operations for blog posts.
+- User Authentication (Register, Login, Logout).
+- Rich Text Editor for blog content.
+- List &amp; Detail View of blog posts.
+- Author-based post management (Only authors can edit/delete their own posts).
+- Mobile-Responsive UI with Bootstrap 5.
 
 
 ## &nbsp;Installation Guide
