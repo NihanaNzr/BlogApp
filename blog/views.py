@@ -13,6 +13,8 @@ def register(request):
             user = form.save()
             messages.success(request, "Registration successful! You can now log in.")
             return redirect('login')  # Redirect to login after successful registration
+        else:
+            messages.error(request, "Registration failed. Please check your inputs.")
     else:
         form = RegisterForm()
     return render(request, 'blog/register.html', {'form': form})
@@ -23,15 +25,21 @@ def login_user(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
+            messages.success(request, f"Welcome, {user.username}!")
             return redirect('home')  # Redirect to home page after login
+        else:
+            messages.error(request, "Invalid username or password. Please try again.")
     else:
         form = AuthenticationForm()
     return render(request, 'blog/login.html', {'form': form})
 
+
 def logout_user(request):
     logout(request)
     request.session.flush()
-    return redirect('login')  # Redirect to login page after logout
+    messages.success(request, "You have been logged out successfully.")
+    return redirect('login') 
+
 
 @login_required
 def home(request):
