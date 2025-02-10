@@ -44,7 +44,7 @@ Access the app at [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
 - Create a Blog: Use the rich text editor to write a blog post.
 - Edit/Delete Posts: Authors can modify or remove their own posts.
 - Browse Blogs: View published blogs in a user-friendly interface.
-## 🛠 Built With
+##  Built With
 
 - Django - Backend Framework
 - Bootstrap 5 - Frontend Styling
